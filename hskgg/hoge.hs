@@ -156,3 +156,28 @@ instance YesNo (Tree a) where
 instance YesNo TrafficLight where
     yesno Red = False
     yesno _ = True
+
+
+
+{-
+class Functor f where
+    fmap :: (a -> b) -> f a -> f b
+
+Functorが要求しているのは型コンストラクタ
+型注釈の f a で具体型になるようなやつ
+Maybe とか [] とか
+-}
+
+instance Functor Tree where
+    fmap f EmptyTree = EmptyTree
+    fmap f (Node x left right)
+        = Node (f x) (fmap f left) (fmap f right)
+
+{-
+*Main> :k Int
+Int :: *
+
+* は具体型を表す記号
+}
+
+
